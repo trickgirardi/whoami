@@ -26,16 +26,18 @@ export const prerender = true;
     class="text-white m-auto p-2 grid gap-2 max-w-6xl overflow-x-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-3 md:p-6 xl:h-[max(100dvh,830px)] xl:grid-rows-8 xl:grid-cols-4 xl:gap-4"
   >
     <IntroCard />
-    <AboutMe />
     <ContactsCard />
-    <TimeZone />
+    <AboutMe />
     <DesignWorksCard />
     <Now />
     <ModeControlsCard />
+    <TimeZone />
     <Card colSpan="md:col-span-1" rowSpan="md:row-span-1">
       <div class="flex h-full items-center justify-center">
         <p class="text-3xs text-center whitespace-nowrap">
-          © {new Date().getFullYear()} · Crafted with <span class="text-red-500">♥</span> using <a
+          © {new Date().getFullYear()} · Crafted with <span class="text-red-500"
+            >♥</span
+          > using <a
             class="text-red-500"
             href="https://astro.build/"
             target="_blank">Astro</a

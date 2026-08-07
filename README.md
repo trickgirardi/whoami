@@ -54,7 +54,6 @@ This walks you through your name, links, email, location/timezone and more, upda
 
 A few things the script **doesn't** cover:
 
-- Swap the avatar/memoji image — replace `src/assets/me-dither.webp` with your own.
 - Remove (or replace with your own ID) the **Umami analytics** script tag in `src/layouts/BasicLayout.astro`.
 
 ## Scripts

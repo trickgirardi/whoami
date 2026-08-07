@@ -12,7 +12,7 @@ Resultado alvo desta versão:
 - Projetos apresentados em um card resumido na home, sem imagens nesta fase.
 - Dark mode atual + white mode baseado no estilo Paper.
 - Accent fixo `#f4dbd6`.
-- Sem Blog, Guestbook, Playground, países visitados, sons ou temas extras; avatar preservado estático.
+- Sem Blog, Guestbook, Playground, países visitados, sons, avatar ou temas extras.
 - Umami preparado por variável de ambiente; Ahrefs removido.
 
 A internacionalização (inglês em `/en`) fica explicitamente adiada para a próxima versão.
@@ -52,7 +52,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Excluir Blog, posts Markdown, coleção de conteúdo, `LayoutBlogPost`, cálculo de leitura e `/rss.xml`.
 - Excluir `travel.astro`, `Globe.tsx` e `world.json`.
 - Excluir galeria antiga `design-works.astro`, `illustrations.ts` e ilustrações do template; o card Projects será criado depois na home.
-- Preservar somente avatar Memoji padrão no Welcome; remover `Tooltip`, assets de variações de tema e toda lógica de levitação ou troca de avatar.
+- Remover avatar do Welcome, `Tooltip`, assets de avatar e toda lógica relacionada.
 - Remover botão “Book a call”, integração Cal.com e campos `SITE.cal`.
 - Remover sons do botão global, seletor de temas e `PixelHeart`; o coração visual pode permanecer estático no rodapé.
 - Remover links Medium, Dribbble e Behance, incluindo referências quebradas a `dribbble`.
@@ -220,5 +220,5 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Rota pública desta versão: `/`.
 - Rotas removidas não terão redirecionamento.
 - Interface interna nesta versão: conteúdo local em PT-BR; o tipo `Locale = "pt-br" | "en"` será introduzido na próxima versão.
-- Não haverá banco, endpoints, Blog, RSS, Playground, mapa, sons ou logos de stack nesta fase; avatar único permanece estático.
+- Não haverá banco, endpoints, Blog, RSS, Playground, mapa, sons, avatar ou logos de stack nesta fase.
 - O repositório já possui alterações locais não relacionadas em `.github/FUNDING.yml`, `AGENTS.md` e no plano inicial; elas devem ser preservadas.
