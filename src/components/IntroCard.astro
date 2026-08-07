@@ -3,13 +3,8 @@ import Card from "./Card/index.astro";
 import Button from "./Button.astro";
 import { LINKS } from "../lib/constants";
 import { Icon } from "astro-icon/components";
-import Tooltip from "./Tooltip/index";
 import { SITE } from "../site-config";
 import MemojiAvatarDefault from "../assets/me-dither.webp";
-import MemojiAvatarBlue from "../assets/me-dither-blue.webp";
-import MemojiAvatarGreen from "../assets/me-dither-green.webp";
-import MemojiAvatarPurple from "../assets/me-dither-purple.webp";
-import MemojiAvatarYellow from "../assets/me-dither-yellow.webp";
 ---
 
 <Card colSpan="md:col-span-3" rowSpan="md:row-span-4" class="pad-lg">
@@ -72,34 +67,7 @@ import MemojiAvatarYellow from "../assets/me-dither-yellow.webp";
               >
             </Button>
           </a>
-          <a
-            href={LINKS.dribbble}
-            aria-label="dribbble profile"
-            target="_blank"
-          >
-            <Button aria-label="dribbble profile">
-              <Icon name="ri:dribbble-fill" />
-              <span class="sr-only" data-umami-event="Dribbble button"
-                >Dribbble Profile</span
-              >
-            </Button>
-          </a>
-          <Tooltip client:visible>
-            <Button aria-label="easter egg btn">
-              <Icon name="ri:emotion-laugh-line" />
-              <span class="sr-only" data-umami-event="Easter egg button"
-                >Easter egg button</span
-              >
-            </Button>
-          </Tooltip>
         </div>
-        <Button aria-label="book a call" data-cal-link={SITE.cal.username}>
-          <span
-            data-umami-event="Book a call"
-            data-cal-link={SITE.cal.username}
-            class="font-bold whitespace-nowrap">Book a call</span
-          >
-        </Button>
       </div>
     </div>
     <img
@@ -107,11 +75,6 @@ import MemojiAvatarYellow from "../assets/me-dither-yellow.webp";
       src={MemojiAvatarDefault.src}
       width={MemojiAvatarDefault.width}
       height={MemojiAvatarDefault.height}
-      data-theme-default={MemojiAvatarDefault.src}
-      data-theme-yellow-theme={MemojiAvatarYellow.src}
-      data-theme-blue-theme={MemojiAvatarBlue.src}
-      data-theme-green-theme={MemojiAvatarGreen.src}
-      data-theme-purple-theme={MemojiAvatarPurple.src}
       class="w-auto max-h-[300px] select-none absolute right-[-110px] bottom-[-20px] z-[-1] opacity-50 md:opacity-100 md:relative md:right-auto md:bottom-auto md:z-auto pointer-events-none"
       alt={`memoji of ${SITE.author.firstName}`}
       loading="eager"
@@ -120,64 +83,3 @@ import MemojiAvatarYellow from "../assets/me-dither-yellow.webp";
     />
   </div>
 </Card>
-
-<script>
-  import { animate } from "motion";
-
-  function updateMemojiImage() {
-    const avatarImg = document.getElementById(
-      "memoji-avatar",
-    ) as HTMLImageElement;
-    if (!avatarImg) return;
-
-    const theme = localStorage.getItem("theme") || "default";
-    const imageSrc =
-      avatarImg.getAttribute(`data-theme-${theme}`) ??
-      avatarImg.getAttribute("data-theme-default");
-    if (!imageSrc) return;
-
-    const next = new URL(imageSrc, location.href).href;
-    if (avatarImg.src === next) return;
-
-    if (avatarImg.srcset) avatarImg.srcset = "";
-    avatarImg.src = next;
-  }
-
-  function initLevitatingAnimation() {
-    const avatarImg = document.getElementById("memoji-avatar") as HTMLElement;
-    if (!avatarImg) return;
-
-    animate(
-      avatarImg,
-      { y: [-10, 10, -10] },
-      {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    );
-  }
-
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.attributeName === "class"
-      ) {
-        updateMemojiImage();
-      }
-    });
-  });
-
-  document.addEventListener("astro:page-load", () => {
-    updateMemojiImage();
-    initLevitatingAnimation();
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  });
-
-  document.addEventListener("astro:before-swap", () => observer.disconnect());
-  document.addEventListener("themechange", updateMemojiImage);
-</script>

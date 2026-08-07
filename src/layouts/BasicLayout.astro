@@ -5,7 +5,6 @@ import { Font } from "astro:assets";
 import { LINKS } from "../lib/constants";
 import { SITE } from "../site-config";
 import GridTransition from "../components/GridTransition.astro";
-import StylePanel from "../components/StylePanel.astro";
 import { BUTTON_FRAME, cssVars } from "../lib/nine-slice";
 
 const buttonFrameVars = `:root{${cssVars(BUTTON_FRAME.vars)}}`;
@@ -13,160 +12,50 @@ const buttonFrameVars = `:root{${cssVars(BUTTON_FRAME.vars)}}`;
 interface Props {
   title: string;
   description: string;
-  page?: "travel" | "blog";
-  slug?: string | undefined;
-  pubDate?: string;
-  hideSoundToggle?: boolean;
-  hideCal?: boolean;
 }
 
-const { title, description, page, pubDate, hideSoundToggle, hideCal } =
-  Astro.props;
+const { title, description } = Astro.props;
 const image = `${Astro.url.origin}/og-image.png`;
+const siteDomain = new URL(SITE.site.url).hostname;
 
-// Cal.com element-click embed. Kept as a string + set:html so Prettier's Astro
-// parser doesn't try to parse the raw IIFE as JSX (which breaks formatting).
-const calEmbedScript = `
-  function initCal() {
-  (function (C, A, L) {
-    let p = function (a, ar) {
-      a.q.push(ar);
-    };
-    let d = C.document;
-    C.Cal =
-      C.Cal ||
-      function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () {
-            p(api, arguments);
-          };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === "string") {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else p(cal, ar);
-          return;
-        }
-        p(cal, ar);
-      };
-  })(window, "https://app.cal.com/embed/embed.js", "init");
-  const calNamespace =
-    document.documentElement.dataset.calNamespace || "15min";
-  const calOrigin =
-    document.documentElement.dataset.calOrigin || "https://cal.com";
-
-  Cal("init", calNamespace, { origin: calOrigin });
-
-  Cal.ns[calNamespace]("ui", {
-    styles: { branding: { brandColor: "#000000" } },
-    hideEventTypeDetails: false,
-    layout: "month_view",
-  });
-  }
-
-  var calStarted = false;
-  function startCal(event) {
-    if (calStarted) return;
-    var target = event.target;
-    if (!target || !target.closest || !target.closest("[data-cal-link]")) return;
-    calStarted = true;
-    initCal();
-  }
-
-  ["pointerover", "touchstart", "focusin", "click"].forEach(function (type) {
-    document.addEventListener(type, startCal, { passive: true });
-  });
-`;
-
-const schema =
-  page !== "blog"
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: SITE.author.fullName,
-        url: Astro.url.origin,
-        sameAs: [LINKS.linkedin, LINKS.github, LINKS.dribbble, LINKS.behance],
-        image: `${Astro.url.origin}/og-image.png`,
-        jobTitle: SITE.author.jobTitle,
-        knowsAbout: [
-          "JavaScript",
-          "React",
-          "Astro",
-          "Solid.js",
-          "Svelte",
-          "Node.js",
-          "User Experience",
-          "Web Development",
-        ],
-        worksFor: {
-          "@type": "Organization",
-          name: "Self-Employed",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: SITE.location.countryName,
-            addressCountry: SITE.location.countryCode,
-          },
-        },
-        nationality: {
-          "@type": "Country",
-          name: SITE.location.countryName,
-        },
-      }
-    : {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": Astro.url.href,
-        },
-        headline: title || title,
-        description: description || title,
-        image: `${Astro.url.origin}/og-image.png`, //TODO: dynamic
-        author: {
-          "@type": "Person",
-          name: SITE.author.shortName,
-          url: Astro.url.origin,
-          sameAs: [LINKS.linkedin, LINKS.github],
-        },
-        publisher: {
-          "@type": "Organization",
-          name: SITE.author.shortName,
-          logo: {
-            "@type": "ImageObject",
-            url: `${Astro.url.origin}/og-image.png`,
-          },
-        },
-        datePublished: pubDate || new Date().toISOString(),
-        dateModified: pubDate || new Date().toISOString(),
-      };
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.author.fullName,
+  url: Astro.url.origin,
+  sameAs: [LINKS.linkedin, LINKS.github],
+  image: `${Astro.url.origin}/og-image.png`,
+  jobTitle: SITE.author.jobTitle,
+  knowsAbout: ["JavaScript", "React", "Astro", "Node.js", "Web Development"],
+  worksFor: {
+    "@type": "Organization",
+    name: "Self-Employed",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: SITE.location.countryName,
+      addressCountry: SITE.location.countryCode,
+    },
+  },
+  nationality: {
+    "@type": "Country",
+    name: SITE.location.countryName,
+  },
+};
 ---
 
 <!doctype html>
 <html
   lang="en"
-  data-cal-namespace={SITE.cal.durationNamespace}
-  data-cal-origin={SITE.cal.origin}
 >
   <head>
     <meta charset="UTF-8" />
     <Font cssVariable="--font-cabinet-grotesk" preload />
     <Font cssVariable="--font-satoshi" preload />
     <ClientRouter />
-    {/* Render-blocking: the cards must not paint with the wrong chrome. */}
+    {/* Render-blocking: the cards must use their fixed custom chrome. */}
     <script is:inline>
       try {
-        if ((localStorage.getItem("cardBorder") ?? "custom") === "custom")
-          document.documentElement.classList.add("cards-custom");
+        document.documentElement.classList.add("cards-custom");
       } catch {}
     </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -186,10 +75,7 @@ const schema =
       name="keywords"
       content={`full stack developer, web developer, React, Astro, Solid.js, Svelte, freelance developer, ${SITE.location.countryName}, UX, animations, micro-interactions`}
     />
-    <meta
-      content={page === "blog" ? "article" : "website"}
-      property="og:type"
-    />
+    <meta content="website" property="og:type" />
     <meta content={title} property="og:title" />
     <meta content={description} property="og:description" />
     <meta content={Astro.url.origin} property="og:url" />
@@ -223,168 +109,15 @@ const schema =
       is:inline
       src="https://cloud.umami.is/script.js"
       data-website-id={import.meta.env.UMAMI_WEBSITE_ID}
-      data-domains={SITE.site.domain}></script>
-    <script
-      src="https://analytics.ahrefs.com/analytics.js"
-      data-key={import.meta.env.AHREFS_ANALYTICS_KEY}
-      async></script>
-
-    <!-- Cal element-click embed code begins -->
-    {
-      !hideCal && (
-        <script is:inline type="text/javascript" set:html={calEmbedScript} />
-      )
-    }
-    <!-- Cal element-click embed code ends -->
-
+      data-domains={siteDomain}></script>
     <style is:inline set:html={buttonFrameVars}></style>
   </head>
   <body class="bg-darkslate-700 flex flex-col justify-center items-center">
-    <script is:inline>
-      try {
-        var b = document.body;
-        var t = localStorage.getItem("theme");
-        if (t && t !== "default") b.classList.add(t);
-        if ((localStorage.getItem("cardBorder") ?? "custom") !== "custom") {
-          var s = localStorage.getItem("portfolioStyle");
-          if (s && s !== "default") b.classList.add(s);
-        }
-      } catch {}
-    </script>
     <GridTransition />
     <slot name="loader" />
     <slot />
-    {
-      !hideSoundToggle && (
-        <div class="fixed bottom-4 right-4 md:bottom-6 z-50 flex flex-col items-center gap-2">
-          <StylePanel />
-          <button
-            id="sound-toggle"
-            aria-label="Toggle sound"
-            title="Toggle sound"
-            class="chrome--ns w-9 h-9 flex items-center justify-center rounded-lg bg-darkslate-500 border border-darkslate-400 hover:border-primary-500 transition-all duration-200 text-white shadow-lg"
-          >
-            <svg
-              id="sound-icon-on"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            </svg>
-            <svg
-              id="sound-icon-off"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="hidden"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-          </button>
-        </div>
-      )
-    }
   </body>
 </html>
-
-<script>
-  import { SITE } from "../site-config";
-
-  let audioCtx: AudioContext | null = null;
-  let soundEnabled = localStorage.getItem("soundEnabled") !== "false";
-
-  function getAudioCtx(): AudioContext {
-    if (!audioCtx) audioCtx = new AudioContext();
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    return audioCtx;
-  }
-
-  function playCardHover() {
-    if (!soundEnabled) return;
-    const ctx = getAudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(1100, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.018);
-    gain.gain.setValueAtTime(0.12, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.018);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.018);
-  }
-
-  function updateToggleIcon() {
-    document
-      .getElementById("sound-icon-on")
-      ?.classList.toggle("hidden", !soundEnabled);
-    document
-      .getElementById("sound-icon-off")
-      ?.classList.toggle("hidden", soundEnabled);
-  }
-
-  function attachCardSounds() {
-    document.querySelectorAll<HTMLElement>(".card").forEach((card) => {
-      card.removeEventListener("mouseenter", playCardHover);
-      card.addEventListener("mouseenter", playCardHover);
-    });
-
-    document.getElementById("sound-toggle")?.addEventListener("click", () => {
-      soundEnabled = !soundEnabled;
-      localStorage.setItem("soundEnabled", String(soundEnabled));
-      updateToggleIcon();
-    });
-  }
-
-  document.addEventListener("astro:page-load", () => {
-    soundEnabled = localStorage.getItem("soundEnabled") !== "false";
-    updateToggleIcon();
-    attachCardSounds();
-  });
-
-  console.log(
-    "%c\n" +
-      "  .-. (  ) .-.   .-. (  ) .-.   .-.\n" +
-      " (* *)( ** )* *) (* *)( ** )(* *) (* *)\n" +
-      "  `-'  `--' `-'   `-'  `--' `-'   `-'\n" +
-      "   |    |    |     |    |    |     |\n" +
-      "   |    |    |     |    |    |     |\n" +
-      "---+----+----+-----+----+----+-----+---\n" +
-      " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-      "   ~    ~    ~     ~    ~    ~     ~\n",
-    "color:var(--primary-500);font-family:monospace;font-size:11px;line-height:1.5;",
-  );
-  console.log(
-    "%cMate, what are you looking for here? 😄",
-    "color:var(--primary-400);font-size:15px;font-weight:bold;",
-  );
-  console.log(
-    "%cJust send me a message, I'd love to connect.\n",
-    "color:var(--darkslate-200);font-size:12px;",
-  );
-  console.log(
-    `%c💼  ${SITE.links.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}\n📧  ${SITE.links.email}`,
-    "color:var(--primary-300);font-size:12px;line-height:2;",
-  );
-</script>
 
 <script>
   import {

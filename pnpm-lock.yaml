@@ -11,33 +11,15 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.10
         version: 0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
-      '@astrojs/markdown-remark':
-        specifier: ^7.2.2
-        version: 7.2.2
       '@astrojs/netlify':
         specifier: ^8.2.0
         version: 8.2.0(@parcel/watcher@2.5.6)(@types/node@26.1.2)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.12)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0))(jiti@2.7.0)(rollup@4.60.1)(yaml@2.9.0)
-      '@astrojs/rss':
-        specifier: ^4.0.19
-        version: 4.0.19
       '@astrojs/sitemap':
         specifier: ^3.7.3
         version: 3.7.3
-      '@astrojs/solid-js':
-        specifier: ^7.0.2
-        version: 7.0.2(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(solid-js@1.9.14)(yaml@2.9.0)
-      '@astrojs/svelte':
-        specifier: ^9.0.1
-        version: 9.0.1(@types/node@26.1.2)(astro@7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.12)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0))(esbuild@0.28.1)(jiti@2.7.0)(svelte@5.56.8(@typescript-eslint/types@8.66.0))(typescript@6.0.3)(yaml@2.9.0)
       '@iconify-json/ri':
         specifier: ^1.2.10
         version: 1.2.10
-      '@libsql/client':
-        specifier: ^0.17.4
-        version: 0.17.4
-      '@rive-app/canvas':
-        specifier: 2.37.1
-        version: 2.37.1
       astro:
         specifier: ^7.2.0
         version: 7.2.0(@astrojs/markdown-remark@7.2.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.12)(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0)
@@ -47,43 +29,13 @@ importers:
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
-      d3:
-        specifier: ^7.9.0
-        version: 7.9.0
-      drizzle-orm:
-        specifier: ^0.45.2
-        version: 0.45.2(@electric-sql/pglite@0.3.16)(@libsql/client@0.17.4)(@opentelemetry/api@1.9.1)
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
-      lenis:
-        specifier: ^1.3.26
-        version: 1.3.26
-      mdast-util-to-string:
-        specifier: ^4.0.0
-        version: 4.0.0
       motion:
         specifier: ^12.43.0
         version: 12.43.0
-      reading-time:
-        specifier: ^1.5.0
-        version: 1.5.0
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
-      svelte:
-        specifier: ^5.56.8
-        version: 5.56.8(@typescript-eslint/types@8.66.0)
-      tweakpane:
-        specifier: ^4.0.5
-        version: 4.0.5
     devDependencies:
-      '@tweakpane/core':
-        specifier: ^2.0.5
-        version: 2.0.5
-      '@types/d3':
-        specifier: ^7.4.3
-        version: 7.4.3
       '@typescript-eslint/parser':
         specifier: ^8.66.0
         version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
@@ -111,18 +63,12 @@ importers:
       lint-staged:
         specifier: ^16.4.0
         version: 16.4.0
-      markdown-it:
-        specifier: ^14.3.0
-        version: 14.3.0
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
-      sanitize-html:
-        specifier: ^2.17.6
-        version: 2.17.6
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

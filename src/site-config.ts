@@ -18,17 +18,6 @@ export const SITE = {
   "links": {
     "github": "https://github.com/trickgirardi",
     "linkedin": "https://www.linkedin.com/in/patrickgirardi/",
-    "medium": "null",
-    "discord": "null",
-    "dribble": "null",
     "email": "patrickgirardi@proton.me"
-  },
-  "cal": {
-    "username": "null",
-    "durationNamespace": "null",
-    "origin": "https://cal.com"
-  },
-  "visitedCountries": [
-    "null"
-  ]
+  }
 };

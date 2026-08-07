@@ -5,13 +5,6 @@ import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
 import icon from "astro-icon";
 
-import solidJs from "@astrojs/solid-js";
-import { remarkReadingTime } from "./src/lib/remark-reading-time.mjs";
-
-import svelte from "@astrojs/svelte";
-
-import { unified } from "@astrojs/markdown-remark";
-
 const envSiteUrl = process.env.SITE_URL ?? "https://gianmarcocavallo.com/";
 const site = envSiteUrl.endsWith("/") ? envSiteUrl : `${envSiteUrl}/`;
 const siteNoTrailingSlash = site.endsWith("/") ? site.slice(0, -1) : site;
@@ -68,21 +61,13 @@ export default defineConfig({
         `${siteNoTrailingSlash}/sitemap-0.xml`,
       ],
     }),
-    solidJs(),
     UnoCSS({ injectReset: true }),
     icon(),
-    svelte(),
   ],
-  markdown: unified({
-    remarkPlugins: [remarkReadingTime],
-  }),
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "hover",
   },
   output: "server",
   adapter: netlify({ middlewareMode: "edge" }),
-  vite: {
-    assetsInclude: "**/*.riv",
-  },
 });

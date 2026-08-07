@@ -46,25 +46,6 @@
   }
 
   function applyTheme() {
-    const theme = localStorage.getItem("theme");
-    document.body.classList.remove(
-      "yellow-theme",
-      "blue-theme",
-      "purple-theme",
-      "green-theme",
-    );
-    if (theme && theme !== "default") document.body.classList.add(theme);
-    const portfolioStyle = localStorage.getItem("portfolioStyle");
-    document.body.classList.remove(
-      "style-glass",
-      "style-sharp",
-      "style-neon",
-      "style-paper",
-    );
-    const customBorder =
-      (localStorage.getItem("cardBorder") ?? "custom") === "custom";
-    if (!customBorder && portfolioStyle && portfolioStyle !== "default")
-      document.body.classList.add(portfolioStyle);
     const color = getComputedStyle(document.body)
       .getPropertyValue("--primary-500")
       .trim();
