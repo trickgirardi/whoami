@@ -1,9 +1,58 @@
 ---
 import Card from "./Card/index.astro";
+
+const projects = [
+  {
+    title: "Project One",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    technologies: "Astro · TypeScript",
+    href: "https://example.com/project-one",
+  },
+  {
+    title: "Project Two",
+    summary: "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
+    technologies: "React · CSS",
+    href: "https://example.com/project-two",
+  },
+  {
+    title: "Project Three",
+    summary: "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+    technologies: "Next.js · PostgreSQL",
+    href: "https://example.com/project-three",
+  },
+  {
+    title: "Project Four",
+    summary: "Duis aute irure dolor in reprehenderit voluptate velit esse.",
+    technologies: "Node.js · APIs",
+    href: "https://example.com/project-four",
+  },
+];
 ---
 
 <Card
   colSpan="xl:col-span-1"
-  rowSpan="md:row-span-1"
-  title="Design Works"
-/>
+  rowSpan="md:row-span-2"
+  title="Projects"
+  class="pad-lg"
+>
+  <div class="grid grid-cols-2 gap-3 mt-3">
+    {
+      projects.map(({ title, summary, technologies, href }) => (
+        <article class="min-w-0 flex flex-col gap-1">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-bold hover:text-primary-400 transition-colors"
+          >
+            {title}
+          </a>
+          <p class="m-0 text-3xs leading-snug text-darkslate-200">{summary}</p>
+          <span class="text-4xs uppercase tracking-wide text-darkslate-400">
+            {technologies}
+          </span>
+        </article>
+      ))
+    }
+  </div>
+</Card>

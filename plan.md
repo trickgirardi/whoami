@@ -4,20 +4,22 @@
 
 Base atual: Astro 7, Bento grid, SSR/Netlify, com recursos de Blog, Guestbook, Playground, mapa de viagens, temas, sons e animações de template.
 
-Resultado alvo:
+Resultado alvo desta versão:
 
-- PT-BR em `/` e `/projects`; inglês em `/en` e `/en/projects`.
+- PT-BR somente na home `/`.
 - Home em tela cheia, mantendo Bento grid.
 - Apenas GitHub e LinkedIn como links sociais.
-- Projetos em grid de cards, sem imagens nesta fase.
+- Projetos apresentados em um card resumido na home, sem imagens nesta fase.
 - Dark mode atual + white mode baseado no estilo Paper.
 - Accent fixo `#f4dbd6`.
 - Sem Blog, Guestbook, Playground, países visitados, sons ou temas extras; avatar preservado estático.
 - Umami preparado por variável de ambiente; Ahrefs removido.
 
+A internacionalização (inglês em `/en`) fica explicitamente adiada para a próxima versão.
+
 Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as URLs antigas. A configuração nativa de i18n suporta PT-BR sem prefixo e inglês em `/en`. [Routing](https://docs.astro.build/en/guides/routing/), [i18n](https://docs.astro.build/en/guides/internationalization/).
 
-## Etapa 1 — Remover cards e efeitos da home
+## Etapa 1 — Remover cards e efeitos da home ✅ Concluída
 
 **Objetivo:** deixar a home somente com cards que permanecerão.
 
@@ -35,7 +37,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 **Dependências de etapas anteriores:** nenhuma.
 
-## Etapa 2 — Remover recursos, rotas e lógica obsoletos
+## Etapa 2 — Remover recursos, rotas e lógica obsoletos ✅ Concluída
 
 **Objetivo:** eliminar toda funcionalidade fora do escopo, sem redirecionar URLs antigas.
 
@@ -49,7 +51,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Excluir páginas e componentes do Guestbook, endpoints `/api/guestbook` e `/api/reactions`, `db.ts` e `guestbook.ts`.
 - Excluir Blog, posts Markdown, coleção de conteúdo, `LayoutBlogPost`, cálculo de leitura e `/rss.xml`.
 - Excluir `travel.astro`, `Globe.tsx` e `world.json`.
-- Excluir galeria antiga `design-works.astro`, `illustrations.ts` e ilustrações do template; `/projects` será criado depois.
+- Excluir galeria antiga `design-works.astro`, `illustrations.ts` e ilustrações do template; o card Projects será criado depois na home.
 - Preservar somente avatar Memoji padrão no Welcome; remover `Tooltip`, assets de variações de tema e toda lógica de levitação ou troca de avatar.
 - Remover botão “Book a call”, integração Cal.com e campos `SITE.cal`.
 - Remover sons do botão global, seletor de temas e `PixelHeart`; o coração visual pode permanecer estático no rodapé.
@@ -57,7 +59,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 **Dependências de etapas anteriores:** Etapa 1.
 
-## Etapa 3 — Limpar dependências, estilos e assets de template
+## Etapa 3 — Limpar dependências, estilos e assets de template ✅ Concluída
 
 **Objetivo:** reduzir a base antes de adicionar recursos novos.
 
@@ -74,69 +76,40 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Remover paletas alternativas yellow, green, blue e purple, além de `ThemeChangeCard`.
 - Remover Ahrefs; manter somente preparação para Umami.
 - Remover assets públicos exclusivos do Playground e `preview.png` do template após atualizar README.
-- Não remover favicon, Open Graph ou ícones PWA ainda: serão substituídos por assets pessoais na Etapa 7.
+- Não remover favicon, Open Graph ou ícones PWA ainda: serão substituídos por assets pessoais na Etapa 6.
 
 **Dependências de etapas anteriores:** Etapa 2.
 
-## Etapa 4 — Estruturar i18n mínimo
+## Etapa 4 — Criar card Projects e preencher conteúdo pessoal ✅ Concluída com placeholders
 
-**Objetivo:** suportar PT-BR e inglês sem duplicar componentes ou conteúdo.
+**Objetivo:** substituir Design Works por um card resumido de Projects na home, deixando o conteúdo pessoal pronto para edição manual posterior.
 
 **Escopo / especificação:**
 
-- Locale padrão: `pt-br`.
-- Rotas PT-BR: `/` e `/projects`.
-- Rotas inglesas: `/en` e `/en/projects`.
-- Sem i18n por domínio, CMS ou coleção Markdown.
+- Projects será um card da tela inicial, seguindo o padrão visual dos demais cards.
+- O card exibe quatro projetos resumidos, sem página separada nesta versão.
+- Cada projeto possui título, resumo curto, tecnologias e um link externo individual.
+- Os quatro projetos usam textos Lorem Ipsum e links temporários para `example.com`.
+- Sem imagens ou logos de tecnologias nesta primeira versão.
+- Os dados permanecem definidos localmente no componente, sem coleção, CMS ou arquivo exclusivo de projetos.
 
-**Arquivos ou áreas provavelmente afetados:** `astro.config.mjs`, `src/pages/index.astro`, `src/pages/en/`, novo módulo local de i18n e componentes de página reutilizáveis.
+**Arquivos ou áreas afetados:** `src/components/DesignWorksCard.astro`.
 
 **ToDos:**
 
-- Configurar `locales: ["pt-br", "en"]`, `defaultLocale: "pt-br"` e `prefixDefaultLocale: false`.
-- Criar tipo interno `Locale` e mapa tipado de conteúdo PT-BR/EN.
-- Mover apenas a composição reutilizável de home e projetos para componentes compartilhados; rotas devem ser wrappers mínimos por locale.
-- Adaptar componentes existentes para receber cópia localizada, sem criar sistema genérico de CMS.
-- Adicionar seletor flutuante PT/EN próximo ao alternador de modo; links devem trocar para rota equivalente.
-- Ajustar `<html lang>`, títulos, descrições e labels acessíveis por locale.
+- [x] Adaptar card existente de Design Works para “Projects” dentro da home.
+- [x] Renderizar quatro projetos resumidos com links externos seguros (`target="_blank"` e `rel="noopener noreferrer"`).
+- [x] Preservar os conteúdos atuais de Welcome, Stack & Tools, contato, timezone e Now para edição manual posterior.
+- [x] Manter card de copyright sem áudio.
 
 **Dependências de etapas anteriores:** Etapa 3.
 
-## Etapa 5 — Criar Projects e preencher conteúdo pessoal
+**Pendências para substituir os placeholders:**
 
-**Objetivo:** substituir Design Works por projetos reais e adaptar conteúdo dos cards mantidos.
+- Substituir títulos, resumos, tecnologias e links `example.com` pelos dados reais dos quatro projetos.
+- Revisar manualmente os textos atuais de Welcome, Stack & Tools, contato, timezone e Now.
 
-**Escopo / especificação:**
-
-- Página Projects em grid: uma coluna no mobile, duas em telas maiores.
-- Cada projeto: título, resumo, tecnologias e links relevantes.
-- Sem imagens ou logos de tecnologias nesta primeira versão.
-- Dados permanecem no mapa local de conteúdo i18n, sem coleção, CMS ou arquivo exclusivo de projetos.
-
-**Arquivos ou áreas provavelmente afetados:** página/componente de Projects, `DesignWorksCard.astro`, `IntroCard.astro`, `AboutMe.astro`, `ContactsCard.astro`, `Now.astro`, mapa i18n.
-
-**ToDos:**
-
-- Adaptar card existente de Design Works para “Projects”, apontando à rota localizada correta.
-- Criar `/projects` e `/en/projects`, reutilizando a mesma composição.
-- Renderizar cards de projeto com links externos seguros (`target="_blank"` e `rel="noopener noreferrer"`).
-- Adaptar Welcome: texto pessoal aprovado, avatar estático e somente botões GitHub/LinkedIn; sem Easter egg, Dribbble ou Cal.com.
-- Adaptar Stack & Tools para stack aprovada; manter apenas chips textuais.
-- Adaptar card de contato para renderizar somente GitHub e LinkedIn.
-- Manter comportamento do timezone; traduzir somente seus textos fixos.
-- Remover link “what’s this?” do Now; substituir status, data e eventual link por conteúdo aprovado.
-- Manter card de copyright, sem áudio.
-
-**Dependências de etapas anteriores:** Etapa 4.
-
-**Entradas necessárias antes desta etapa:**
-
-- Cópia aprovada em PT-BR e inglês para Welcome, Stack, Now e Projects.
-- Lista final de tecnologias.
-- Projetos com título, resumo, tecnologias e links.
-- Decisão por projeto sobre links disponíveis: demo, repositório ou outro.
-
-## Etapa 6 — Implementar dark/white mode e accent fixo
+## Etapa 5 — Implementar dark/white mode e accent fixo
 
 **Objetivo:** substituir painel de estilos por alternância simples e persistente.
 
@@ -144,7 +117,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 - Dark mode: aparência padrão atual.
 - White mode: variante Paper atual.
-- Um único botão flutuante, ao lado do seletor de idioma.
+- Um único botão flutuante de modo; o seletor de idioma será adicionado na próxima versão.
 - Preferência persistida em `localStorage` sob chave nova, por exemplo `portfolioMode`.
 - Sem sons, painel expansível, variantes extras ou seleção de borda.
 
@@ -162,7 +135,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 **Dependências de etapas anteriores:** Etapas 3 e 4.
 
-## Etapa 7 — Reorganizar grid, metadados e identidade pública
+## Etapa 6 — Reorganizar grid, metadados e identidade pública
 
 **Objetivo:** concluir aparência full-screen e remover identidade residual do template.
 
@@ -182,17 +155,17 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Corrigir fallback de `SITE_URL` para domínio pessoal.
 - Tornar Umami condicional a `UMAMI_WEBSITE_ID`; não carregar script quando variável estiver ausente.
 - Atualizar manifest, Apple title, favicon, ícones PWA e OG image com identidade pessoal.
-- Reescrever README para refletir funcionalidades remanescentes, rotas bilingues, modo dark/white e configuração opcional de Umami.
+- Reescrever README para refletir funcionalidades remanescentes, rotas atuais, modo dark/white e configuração opcional de Umami.
 
-**Dependências de etapas anteriores:** Etapas 4, 5 e 6.
+**Dependências de etapas anteriores:** Etapas 4 e 5.
 
 **Entradas necessárias antes desta etapa:**
 
 - Favicon, ícones PWA e imagem Open Graph pessoais.
-- Textos SEO PT-BR/EN aprovados.
+- Textos SEO PT-BR aprovados.
 - ID do Umami, quando houver.
 
-## Etapa 8 — Verificação final
+## Etapa 7 — Verificação final
 
 **Objetivo:** validar remoções, rotas, responsividade, acessibilidade e build.
 
@@ -204,20 +177,46 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 - Executar `pnpm check`, `pnpm eslint` e `pnpm build`.
 - Confirmar que build não exige credenciais Turso ou arquivos removidos.
-- Validar `/`, `/projects`, `/en` e `/en/projects`.
+- Validar `/` e o card Projects na home.
 - Confirmar 404 para `/playground`, `/guestbook`, `/blog`, `/travel`, `/design-works`, `/rss.xml` e APIs do Guestbook.
-- Testar seletor PT/EN, alternador dark/white, persistência entre navegações e navegação por teclado.
+- Testar alternador dark/white, persistência entre navegações e navegação por teclado.
 - Validar links GitHub/LinkedIn, timezone e todos links de projetos.
 - Conferir home em mobile, tablet e desktop full-screen.
 - Revisar contraste e foco visível em ambos modos.
 - Executar busca final por referências a recursos removidos, nome do template, Ahrefs, Cal.com, Turso e dependências eliminadas.
 
-**Dependências de etapas anteriores:** Etapa 7.
+**Dependências de etapas anteriores:** Etapa 6.
+
+## Etapa 8 — Internacionalização mínima (próxima versão)
+
+**Status:** adiada; não faz parte da versão atual.
+
+**Objetivo:** suportar PT-BR e inglês sem duplicar componentes ou conteúdo.
+
+**Escopo / especificação:**
+
+- Locale padrão: `pt-br`.
+- Rota PT-BR: `/`.
+- Rota inglesa: `/en`.
+- Sem i18n por domínio, CMS ou coleção Markdown.
+
+**Arquivos ou áreas provavelmente afetados:** `astro.config.mjs`, `src/pages/index.astro`, `src/pages/en/`, novo módulo local de i18n e componentes de página reutilizáveis.
+
+**ToDos:**
+
+- Configurar `locales: ["pt-br", "en"]`, `defaultLocale: "pt-br"` e `prefixDefaultLocale: false`.
+- Criar tipo interno `Locale` e mapa tipado de conteúdo PT-BR/EN.
+- Mover apenas a composição reutilizável de home e projetos para componentes compartilhados; rotas devem ser wrappers mínimos por locale.
+- Adaptar componentes existentes para receber cópia localizada, sem criar sistema genérico de CMS.
+- Adicionar seletor flutuante PT/EN próximo ao alternador de modo; links devem trocar para rota equivalente.
+- Ajustar `<html lang>`, títulos, descrições e labels acessíveis por locale.
+
+**Dependências de etapas anteriores:** Etapa 7 da versão atual.
 
 ## Interfaces e decisões fixadas
 
-- Rotas públicas novas: `/`, `/projects`, `/en`, `/en/projects`.
+- Rota pública desta versão: `/`.
 - Rotas removidas não terão redirecionamento.
-- Interface interna: `Locale = "pt-br" | "en"` e mapa tipado de conteúdo local.
+- Interface interna nesta versão: conteúdo local em PT-BR; o tipo `Locale = "pt-br" | "en"` será introduzido na próxima versão.
 - Não haverá banco, endpoints, Blog, RSS, Playground, mapa, sons ou logos de stack nesta fase; avatar único permanece estático.
 - O repositório já possui alterações locais não relacionadas em `.github/FUNDING.yml`, `AGENTS.md` e no plano inicial; elas devem ser preservadas.
