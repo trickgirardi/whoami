@@ -7,6 +7,7 @@ import TimeZone from "../components/TimeZoneCard.astro";
 import AboutMe from "../components/AboutMe.astro";
 import Now from "../components/Now.astro";
 import DesignWorksCard from "../components/DesignWorksCard.astro";
+import ModeControlsCard from "../components/ModeControlsCard.astro";
 import { SITE } from "../site-config";
 
 export const prerender = true;
@@ -30,6 +31,7 @@ export const prerender = true;
     <TimeZone />
     <DesignWorksCard />
     <Now />
+    <ModeControlsCard />
     <Card colSpan="md:col-span-1" rowSpan="md:row-span-1">
       <div class="flex h-full items-center justify-center">
         <p class="text-3xs text-center whitespace-nowrap">

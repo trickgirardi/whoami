@@ -10,23 +10,44 @@
   --darkslate-800: #0e0e0e;
   --darkslate-900: #0b0b0b;
 
-  --primary-100: #f9cdd3;
-  --primary-200: #f3a3aa;
-  --primary-300: #ec7981;
-  --primary-400: #e64f59;
-  --primary-500: #e63946;
-  --primary-600: #cf2f3d;
-  --primary-700: #b82534;
-  --primary-800: #a01b2b;
-  --primary-900: #891321;
+  --primary-100: #fff7f5;
+  --primary-200: #fde7e3;
+  --primary-300: #facfca;
+  --primary-400: #f8afa7;
+  --primary-500: #f4dbd6;
+  --primary-600: #d8b5b0;
+  --primary-700: #bd908c;
+  --primary-800: #9c6f6b;
+  --primary-900: #79504d;
 }
 
-/* Kept as the future white-mode base. Mode switching is added in Etapa 6. */
+/* White mode uses the Paper visual base. */
 .style-paper {
   background: #f0ebe0 !important;
 }
 
+.style-paper body {
+  background: #f0ebe0 !important;
+  color: #1a1208 !important;
+}
+
+body.style-paper {
+  background: #f0ebe0 !important;
+  color: #1a1208 !important;
+}
+
 .style-paper::before {
+  --line-color: rgba(0, 0, 0, 0.06) !important;
+  --line-size: 32px !important;
+  background:
+    linear-gradient(90deg, var(--line-color) 1px, transparent 1px) center / 32px
+      32px,
+    linear-gradient(var(--line-color) 1px, transparent 1px) center / 32px 32px !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+
+body.style-paper::before {
   --line-color: rgba(0, 0, 0, 0.06) !important;
   --line-size: 32px !important;
   background:
@@ -181,122 +202,4 @@ body::before {
 
 .switchboard .star[data-state="high"]::after {
   opacity: 1;
-}
-
-:root {
-  --ns-fill: var(--darkslate-500);
-  --ns-rail: var(--darkslate-400);
-  --ns-pad: 1.625rem;
-}
-
-.cards-custom .card--ns {
-  background-color: var(--ns-fill) !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: var(--ns-pad-y, var(--ns-pad)) var(--ns-pad-x, var(--ns-pad));
-  min-width: var(--ns-min);
-  min-height: var(--ns-min);
-}
-
-.cards-custom .card--ns::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -20;
-  border: var(--ns-border) solid transparent;
-  border-image-source: var(--ns-image);
-  border-image-slice: var(--ns-slice) fill;
-  border-image-repeat: stretch;
-  pointer-events: none;
-}
-
-.cards-custom .card--ns:hover {
-  --ns-rail: var(--primary-500);
-}
-
-@supports (
-  -webkit-mask-box-image: linear-gradient(#000, #000) 10 fill / 10px stretch
-) {
-  .cards-custom .card--ns {
-    -webkit-mask-box-image: var(--ns-mask) var(--ns-slice) fill /
-      var(--ns-border) stretch;
-  }
-
-  .cards-custom .card--ns::before {
-    z-index: 2;
-    border-image-source: none;
-    background-color: var(--ns-rail);
-    -webkit-mask-box-image: var(--ns-rail-mask) var(--ns-slice) fill /
-      var(--ns-border) stretch;
-    transition: background-color 150ms ease-out;
-  }
-}
-
-body.ns-js-shape .card--ns {
-  -webkit-mask-box-image: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-}
-
-body.ns-js-shape .card--ns::before {
-  opacity: 0 !important;
-}
-
-.cards-custom #formatToggle {
-  top: var(--ns-pad-y, var(--ns-pad));
-  right: var(--ns-pad-x, var(--ns-pad));
-}
-
-@media (min-width: 1024px) {
-  .card.pad-lg {
-    padding: 1.875rem;
-    --ns-pad: 1.875rem;
-  }
-}
-
-@supports (
-  -webkit-mask-box-image: linear-gradient(#000, #000) 10 fill / 10px stretch
-) {
-  .cards-custom .btn--ns,
-  .cards-custom .chrome--ns {
-    position: relative;
-    border-radius: 0 !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    min-width: var(--bt-min);
-    min-height: var(--bt-min);
-    -webkit-mask-box-image: var(--bt-mask) var(--bt-slice) fill /
-      var(--bt-border) stretch;
-  }
-
-  .cards-custom .btn--ns::before,
-  .cards-custom .chrome--ns::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: var(--bt-rail, var(--primary-500));
-    -webkit-mask-box-image: var(--bt-rail-mask) var(--bt-slice) fill /
-      var(--bt-border) stretch;
-    transition: background-color 150ms ease-out;
-  }
-
-  .cards-custom .chrome--ns {
-    --bt-rail: var(--darkslate-400);
-  }
-
-  .cards-custom .chrome--ns:hover {
-    --bt-rail: var(--primary-500);
-  }
-
-  .cards-custom .btn-shell {
-    --bt-lift: drop-shadow(1px 1px 0 var(--primary-500));
-    filter: var(--bt-lift) var(--bt-lift) var(--bt-lift);
-  }
-
-  .cards-custom .btn-shell:has(.btn--ns:active) {
-    filter: none;
-  }
 }

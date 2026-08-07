@@ -109,7 +109,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Substituir títulos, resumos, tecnologias e links `example.com` pelos dados reais dos quatro projetos.
 - Revisar manualmente os textos atuais de Welcome, Stack & Tools, contato, timezone e Now.
 
-## Etapa 5 — Implementar dark/white mode e accent fixo
+## Etapa 5 — Implementar dark/white mode e accent fixo ✅ Concluída
 
 **Objetivo:** substituir painel de estilos por alternância simples e persistente.
 
@@ -117,17 +117,19 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 
 - Dark mode: aparência padrão atual.
 - White mode: variante Paper atual.
-- Um único botão flutuante de modo; o seletor de idioma será adicionado na próxima versão.
+- Adicionar um card de controles na home com dois botões: modo dark/light e idioma.
+- O botão de idioma será apenas visual/desabilitado nesta etapa; sua funcionalidade fica para a próxima versão.
 - Preferência persistida em `localStorage` sob chave nova, por exemplo `portfolioMode`.
 - Sem sons, painel expansível, variantes extras ou seleção de borda.
 
-**Arquivos ou áreas provavelmente afetados:** novo `ColorModeToggle.astro`, `BasicLayout.astro`, `GridTransition.astro`, `style.css`.
+**Arquivos ou áreas provavelmente afetados:** novo card/componente de controles, `BasicLayout.astro`, `GridTransition.astro`, `style.css` e composição da home.
 
 **ToDos:**
 
-- Criar botão acessível com estado e label claros para alternar dark/white.
+- Criar card com dois botões acessíveis e labels claros; somente o botão dark/light deve ser funcional.
+- Manter o botão de idioma visível, porém desabilitado ou marcado como indisponível até a etapa de i18n.
 - Aplicar preferência antes da pintura da página e durante navegação via `ClientRouter`.
-- Usar `style-paper` somente para white mode; manter moldura nine-slice no dark mode e desativá-la no white mode, preservando aparência Paper.
+- Usar `style-paper` somente para white mode; remover a moldura nine-slice do projeto e manter cards simples nos dois modos.
 - Fixar `#f4dbd6` como accent central e definir escala `primary` estável derivada dela.
 - Garantir que accent não seja usado como texto principal no white mode; texto deve manter contraste suficiente.
 - Simplificar `GridTransition` para reconhecer somente os dois modos.
@@ -208,7 +210,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Criar tipo interno `Locale` e mapa tipado de conteúdo PT-BR/EN.
 - Mover apenas a composição reutilizável de home e projetos para componentes compartilhados; rotas devem ser wrappers mínimos por locale.
 - Adaptar componentes existentes para receber cópia localizada, sem criar sistema genérico de CMS.
-- Adicionar seletor flutuante PT/EN próximo ao alternador de modo; links devem trocar para rota equivalente.
+- Ativar o botão de idioma no card de controles; links devem trocar para a rota equivalente.
 - Ajustar `<html lang>`, títulos, descrições e labels acessíveis por locale.
 
 **Dependências de etapas anteriores:** Etapa 7 da versão atual.

@@ -1,0 +1,62 @@
+---
+import Button from "./Button.astro";
+import Card from "./Card/index.astro";
+---
+
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-1" class="pad-lg">
+  <div class="mt-3 flex flex-wrap gap-2 justify-center">
+    <Button
+      compact
+      id="mode-toggle"
+      type="button"
+      aria-label="Switch to light mode"
+    >
+      <span id="mode-toggle-label">Light</span>
+    </Button>
+    <Button compact type="button" aria-label="Language switcher unavailable">
+      <span id="">PT/BR</span>
+    </Button>
+  </div>
+</Card>
+
+<script>
+  const MODE_KEY = "portfolioMode";
+
+  function getMode(): "dark" | "light" {
+    return document.body.classList.contains("style-paper") ? "light" : "dark";
+  }
+
+  function syncModeButton() {
+    const button = document.getElementById("mode-toggle");
+    const label = document.getElementById("mode-toggle-label");
+    if (!(button instanceof HTMLButtonElement) || !label) return;
+
+    const mode = getMode();
+    const nextMode = mode === "light" ? "dark" : "light";
+    button.setAttribute("aria-label", `Switch to ${nextMode} mode`);
+    label.textContent = nextMode === "light" ? "Light" : "Dark";
+  }
+
+  function bindModeButton() {
+    const button = document.getElementById("mode-toggle");
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    syncModeButton();
+    if (button.dataset.bound === "true") return;
+    button.dataset.bound = "true";
+    button.addEventListener("click", () => {
+      const nextMode = getMode() === "light" ? "dark" : "light";
+      document.documentElement.classList.toggle(
+        "style-paper",
+        nextMode === "light",
+      );
+      document.body.classList.toggle("style-paper", nextMode === "light");
+      localStorage.setItem(MODE_KEY, nextMode);
+      syncModeButton();
+      document.dispatchEvent(new CustomEvent("portfolio:mode-change"));
+    });
+  }
+
+  document.addEventListener("astro:page-load", bindModeButton);
+  bindModeButton();
+</script>

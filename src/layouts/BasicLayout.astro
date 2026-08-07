@@ -5,9 +5,6 @@ import { Font } from "astro:assets";
 import { LINKS } from "../lib/constants";
 import { SITE } from "../site-config";
 import GridTransition from "../components/GridTransition.astro";
-import { BUTTON_FRAME, cssVars } from "../lib/nine-slice";
-
-const buttonFrameVars = `:root{${cssVars(BUTTON_FRAME.vars)}}`;
 
 interface Props {
   title: string;
@@ -52,10 +49,11 @@ const schema = {
     <Font cssVariable="--font-cabinet-grotesk" preload />
     <Font cssVariable="--font-satoshi" preload />
     <ClientRouter />
-    {/* Render-blocking: the cards must use their fixed custom chrome. */}
     <script is:inline>
       try {
-        document.documentElement.classList.add("cards-custom");
+        if (localStorage.getItem("portfolioMode") === "light") {
+          document.documentElement.classList.add("style-paper");
+        }
       } catch {}
     </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -110,9 +108,15 @@ const schema = {
       src="https://cloud.umami.is/script.js"
       data-website-id={import.meta.env.UMAMI_WEBSITE_ID}
       data-domains={siteDomain}></script>
-    <style is:inline set:html={buttonFrameVars}></style>
   </head>
   <body class="bg-darkslate-700 flex flex-col justify-center items-center">
+    <script is:inline>
+      try {
+        if (localStorage.getItem("portfolioMode") === "light") {
+          document.body.classList.add("style-paper");
+        }
+      } catch {}
+    </script>
     <GridTransition />
     <slot name="loader" />
     <slot />
