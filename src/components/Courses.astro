@@ -1,0 +1,67 @@
+---
+import Card from "./Card/index.astro";
+
+const courses = [
+  {
+    title: "JavaScript",
+    institution: "b7web",
+    summary:
+      "Curso completo de JavaScript, explorando conceitos, práticas e frameworks modernos.",
+    duration: "66h",
+    href: "https://b7web.com.br/",
+  },
+  {
+    title: "Python - XP Educação",
+    institution: "XP Educação",
+    summary:
+      "Curso completo de Python e suas aplicações, focando no desenvolvimento web.",
+    duration: "148h",
+    href: "https://example.com/course-two",
+  },
+  {
+    title: "SOLID na prática",
+    institution: "FullCycle",
+    summary:
+      "Curso sobre os princípios SOLID e sua aplicação em projetos reais.",
+    duration: "20h",
+    href: "https://fullcycle.com.br/",
+  },
+  {
+    title: "Formação Lógica de Programação",
+    institution: "DIO",
+    summary:
+      "Curso abordando algoritmos, estruturas de dados e resolução de problemas.",
+    duration: "41h",
+    href: "https://example.com/course-four",
+  },
+];
+---
+
+<Card
+  colSpan="xl:col-span-2"
+  rowSpan="md:row-span-2"
+  title="Cursos"
+  class="pad-lg"
+>
+  <div class="grid grid-cols-2 gap-3">
+    {
+      courses.map(({ title, institution, summary, duration, href }) => (
+        <article class="min-w-0 flex flex-col gap-1">
+          <p class="m-0 text-sm font-bold">{title}</p>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs hover:text-primary-400 transition-colors"
+          >
+            {institution}
+          </a>
+          <p class="m-0 text-2xs leading-snug text-darkslate-200">{summary}</p>
+          <span class="text-3xs uppercase tracking-wide text-darkslate-300">
+            {duration}
+          </span>
+        </article>
+      ))
+    }
+  </div>
+</Card>

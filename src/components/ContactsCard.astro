@@ -1,32 +1,67 @@
 ---
 import Card from "./Card/index.astro";
 import { LINKS } from "../lib/constants";
+import Button from "./Button.astro";
+import { Icon } from "astro-icon/components";
 
 const socialLinkClass =
   "inline-block w-fit text-darkslate-100 hover:text-primary-400 hover:translate-x-0.5 transition-all duration-150";
 ---
 
-<Card colSpan="md:col-span-1" rowSpan="md:row-span-4" class="pad-lg">
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-3" class="pad-lg">
   <div class="h-full">
     <header class="flex items-center">
-      <h2 class="text-white text-xl font-bold">
-        Let's start working together!
-      </h2>
+      <h2 class="text-white text-xl font-bold">Contato</h2>
     </header>
     <div class="flex flex-col mt-4 w-fit">
-      <h2 class="text-darkslate-300">Socials</h2>
+      <p class="text-sm text-darkslate-200 mb-2">
+        Se você quiser entrar em contato comigo, sinta-se à vontade para me
+        enviar uma mensagem através das minhas redes sociais ou enviar um
+        e-mail.
+      </p>
       <ul>
         <li>
+          <a href={LINKS.email} target="_blank" class={socialLinkClass}
+            >patrickgirardi@proton.me</a
+          >
+        </li>
+        <li>
           <a href={LINKS.linkedin} target="_blank" class={socialLinkClass}
-            >Linkedin</a
+            >linkedin.com/in/patrickgirardi/</a
           >
         </li>
         <li>
           <a href={LINKS.github} target="_blank" class={socialLinkClass}
-            >Github</a
+            >github.com/trickgirardi</a
           >
         </li>
       </ul>
+    </div>
+    <div class="flex flex-col lg:flex-row gap-2 lg:gap-4 mt-4">
+      <div class="flex gap-2 lg:gap-4">
+        <a href={LINKS.email} aria-label="email" target="_blank">
+          <Button aria-label="email">
+            <Icon name="ri:mail-fill" />
+            <span class="sr-only" data-umami-event="email button">Email</span>
+          </Button>
+        </a>
+        <a href={LINKS.linkedin} aria-label="linkedin profile" target="_blank">
+          <Button aria-label="linkedin profile">
+            <Icon name="ri:linkedin-box-fill" />
+            <span class="sr-only" data-umami-event="linkedin button"
+              >Linkedin Profile</span
+            >
+          </Button>
+        </a>
+        <a href={LINKS.github} aria-label="github profile" target="_blank">
+          <Button aria-label="github profile">
+            <Icon name="ri:github-fill" />
+            <span class="sr-only" data-umami-event="github button"
+              >GitHub Profile</span
+            >
+          </Button>
+        </a>
+      </div>
     </div>
   </div>
 </Card>

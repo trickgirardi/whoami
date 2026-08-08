@@ -1,12 +1,9 @@
 ---
 import Card from "./Card/index.astro";
-import Button from "./Button.astro";
-import { LINKS } from "../lib/constants";
-import { Icon } from "astro-icon/components";
 import { SITE } from "../site-config";
 ---
 
-<Card colSpan="md:col-span-3" rowSpan="md:row-span-4" class="pad-lg">
+<Card colSpan="md:col-span-3" rowSpan="md:row-span-3" class="pad-lg">
   <div class="flex w-full h-full">
     <div class="flex flex-col justify-between gap-4">
       <div class="flex flex-col h-full">
@@ -20,7 +17,9 @@ import { SITE } from "../site-config";
           entender como a web funciona além dos frameworks, explorando desde
           navegadores e servidores até a infraestrutura por trás das aplicações.
           Também busco acompanhar tecnologias modernas e boas práticas para
-          construir software mais seguro, eficiente e fácil de manter.
+          construir software mais seguro, eficiente e fácil de manter. Além do
+          desenvolvimento, tenho interesse por Linux, automações e ferramentas
+          que tornam o trabalho mais produtivo e eficiente.
         </p>
 
         <p aria-hidden="true" class="m-0 font-light text-base">
@@ -47,31 +46,12 @@ import { SITE } from "../site-config";
             Também busco acompanhar tecnologias modernas e boas práticas para
             construir software mais seguro, eficiente e fácil de manter.
           </span>
+
+          <span class="block mt-2">
+            Além do desenvolvimento, tenho interesse por Linux, automações e
+            ferramentas que tornam o trabalho mais produtivo e eficiente.
+          </span>
         </p>
-      </div>
-      <div class="flex flex-col lg:flex-row gap-2 lg:gap-4">
-        <div class="flex gap-2 lg:gap-4">
-          <a href={LINKS.github} aria-label="github profile" target="_blank">
-            <Button aria-label="github profile">
-              <Icon name="ri:github-fill" />
-              <span class="sr-only" data-umami-event="github button"
-                >GitHub Profile</span
-              >
-            </Button>
-          </a>
-          <a
-            href={LINKS.linkedin}
-            aria-label="linkedin profile"
-            target="_blank"
-          >
-            <Button aria-label="linkedin profile">
-              <Icon name="ri:linkedin-box-fill" />
-              <span class="sr-only" data-umami-event="linkedin button"
-                >Linkedin Profile</span
-              >
-            </Button>
-          </a>
-        </div>
       </div>
     </div>
   </div>

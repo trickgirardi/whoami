@@ -1,0 +1,51 @@
+---
+import Card from "./Card/index.astro";
+
+const interests = [
+  {
+    title: "IA",
+    description:
+      "Uso inteligência artificial no workflow profissional e pessoal. Exploro MCPs, SDD, skills, rules e agentes de código.",
+  },
+  {
+    title: "Linux & Open Source",
+    description:
+      "Entusiasta de Linux no desktop, servidores e WSL; acompanho projetos open source e configuro ambientes de desenvolvimento.",
+  },
+  {
+    title: "Produtividade",
+    description:
+      "Transformo informação dispersa em organização e ação com Notion, Obsidian e Todoist.",
+  },
+  {
+    title: "Filosofia & Esoterismo",
+    description:
+      "Interesse por filosofia, simbolismo e tradições esotéricas para compreender consciência, ser humano e mundo.",
+  },
+  {
+    title: "História",
+    description:
+      "Estudo períodos e culturas, especialmente Japão, Grécia Antiga e povos nórdicos.",
+  },
+];
+---
+
+<Card
+  colSpan="md:col-span-1"
+  rowSpan="md:row-span-4"
+  title="Interesses"
+  class="pad-lg"
+>
+  <dl class="mt-1 flex flex-col gap-3">
+    {
+      interests.map(({ title, description }) => (
+        <div class="flex flex-col gap-0.5">
+          <dt class="text-sm font-bold text-darkslate-100">{title}</dt>
+          <dd class="m-0 text-xs leading-snug text-darkslate-300">
+            {description}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</Card>

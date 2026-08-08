@@ -2,41 +2,39 @@
 import Card from "./Card/index.astro";
 
 const stack = [
-  { group: "Languages", items: ["TypeScript", "CSS / SCSS"] },
   {
-    group: "Frontend",
-    items: [
-      "React",
-      "Next.js",
-      "Astro",
-      "Solid.js",
-      "Svelte",
-      "Qwik",
-      "React Native",
-      "Electron",
-    ],
+    group: "Languages",
+    items: ["TypeScript", "Python"],
   },
   {
-    group: "Styling & motion",
-    items: ["Tailwind", "UnoCSS", "GSAP", "Motion", "Rive", "Three.js"],
+    group: "Frontend",
+    items: ["React", "Next.js", "Svelte", "Vite", "Shadcn", "Tailwind CSS"],
   },
   {
     group: "Backend & APIs",
-    items: ["Node.js", "NestJS", "Express", "tRPC", "better-auth"],
+    items: ["Node.js", "Bun", "NestJS", "Express", "Fastify", "Elysia"],
   },
   {
-    group: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Prisma"],
+    group: "Databases & ORM",
+    items: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Drizzle", "Mongoose"],
   },
   {
-    group: "Design & content",
+    group: "Auth & Services",
+    items: ["Better Auth", "Auth.js", "Supabase", "MinIO", "Resend", "n8n"],
+  },
+  {
+    group: "DevOps & Tools",
+    items: ["Linux", "Docker", "Debian & derivatives", "RHEL & derivatives"],
+  },
+  {
+    group: "AI & Developer Tools",
     items: [
-      "Figma",
-      "Adobe Illustrator",
-      "Blender",
-      "Strapi",
-      "UX / UI",
-      "SEO",
+      "Cursor",
+      "Claude Code",
+      "Codex",
+      "Antigravity",
+      "Cline",
+      "OpenCode",
     ],
   },
 ];
@@ -47,7 +45,7 @@ const CHIP =
 
 <Card
   colSpan="md:col-span-1"
-  rowSpan="md:row-span-6"
+  rowSpan="md:row-span-5"
   title="Stack & tools"
   class="pad-lg"
 >

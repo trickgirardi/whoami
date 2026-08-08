@@ -3,23 +3,11 @@ import Card from "./Card/index.astro";
 import Pulse from "./Pulse.astro";
 ---
 
-<Card
-  colSpan="md:col-span-1"
-  rowSpan="md:row-span-1"
-  padding="py-3 px-6"
-  centerY
->
-  <div class="flex flex-col gap-1">
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-1" padding="py-3 px-6">
+  <div class="flex flex-col">
     <div class="flex justify-between items-center w-full">
       <div class="flex items-baseline gap-2">
-        <h2 class="text-white text-lg font-bold">Now</h2>
-        <a
-          href="https://sive.rs/nowff"
-          target="_blank"
-          class="text-3xs text-darkslate-300 hover:text-darkslate-100 transition-colors"
-        >
-          what's this?
-        </a>
+        <h2 class="text-white text-lg font-bold">Atualmente</h2>
       </div>
       <div class="flex items-center gap-1.5">
         <time class="text-3xs text-darkslate-300" datetime="2026-05-07"
@@ -28,13 +16,24 @@ import Pulse from "./Pulse.astro";
         <Pulse />
       </div>
     </div>
-    <p class="text-xs whitespace-nowrap">
-      Currently working fulltime at <a
-        href="https://groupcards.io/"
-        target="_blank"
-        class="underline hover:text-darkslate-100 transition-colors"
-        >GroupCards</a
-      >
-    </p>
-  </div>
-</Card>
+    <div class="flex flex-col gap-1">
+      <p class="text-xs whitespace-wrap">
+        Trabalhando full-time no <a
+          href="https://www.sicoob.com.br/"
+          target="_blank"
+          class="underline hover:text-darkslate-100 transition-colors"
+          >Sicoob,<br />
+        </a>
+        como desenvolvedor full-stack pleno
+      </p>
+      <p class="text-xs whitespace-wrap">
+        Cursando análise e desenvolvimento de sistemas na <a
+          href="https://descomplica.com.br/faculdade/"
+          target="_blank"
+          class="underline hover:text-darkslate-100 transition-colors"
+          >UniAmérica/Descomplica<br />
+        </a>
+      </p>
+    </div>
+  </div></Card
+>
