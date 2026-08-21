@@ -57,9 +57,7 @@ const schema = {
       } catch {}
     </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta content={Astro.generator} name="generator" />
     <title>{title}</title>
     <meta content={description} name="description" />
@@ -87,7 +85,6 @@ const schema = {
     <meta content="summary_large_image" name="twitter:card" />
     <meta content={title} name="twitter:title" />
     <meta content={description} name="twitter:description" />
-    <meta name="twitter:creator" content={`@${SITE.author.twitterHandle}`} />
     <meta
       content={image || `${Astro.url.origin}/og-image.png`}
       name="twitter:image"
