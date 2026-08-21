@@ -42,20 +42,6 @@ pnpm install
 pnpm dev
 ```
 
-## Make It Yours
-
-Run the interactive setup to personalize the site:
-
-```bash
-pnpm site-setup
-```
-
-This walks you through your name, links, email, location/timezone and more, updating `src/site-config.ts` and writing `SITE_URL` to `.env`. Restart the dev server afterwards.
-
-A few things the script **doesn't** cover:
-
-- Remove (or replace with your own ID) the **Umami analytics** script tag in `src/layouts/BasicLayout.astro`.
-
 ## Scripts
 
 | Command           | Description                          |
@@ -66,7 +52,6 @@ A few things the script **doesn't** cover:
 | `pnpm check`      | Type-check with `astro check`        |
 | `pnpm eslint`     | Lint `src`                           |
 | `pnpm format`     | Format with Prettier                 |
-| `pnpm site-setup` | Interactive personalization          |
 
 ## Deploy on Netlify 🚀
 
