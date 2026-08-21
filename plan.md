@@ -147,7 +147,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Reorganização desktop: Welcome ocupa 3×4; Stack 1×8; contato 1×4; timezone, Projects, Now e rodapé ocupam os espaços restantes em blocos 1×2.
 - Mobile e tablet continuam responsivos; sem espaços vazios relevantes.
 
-**Arquivos ou áreas provavelmente afetados:** composição de home, `site-config.ts`, `astro.config.mjs`, `BasicLayout.astro`, `public/site.webmanifest`, assets PWA/SEO e `README.md`.
+**Arquivos ou áreas provavelmente afetados:** composição de home, `site-config.ts`, `astro.config.mjs`, `BasicLayout.astro`, assets de favicon/SEO e `README.md`.
 
 **ToDos:**
 
@@ -156,7 +156,7 @@ Astro cria rotas a partir de `src/pages`; exclusões dessas páginas eliminam as
 - Remover textos, palavras-chave, console messages e metadados herdados de Gianmarco/template.
 - Corrigir fallback de `SITE_URL` para domínio pessoal.
 - Tornar Umami condicional a `UMAMI_WEBSITE_ID`; não carregar script quando variável estiver ausente.
-- Atualizar manifest, Apple title, favicon, ícones PWA e OG image com identidade pessoal.
+- Atualizar favicon e OG image com identidade pessoal; não haverá manifest, Apple title ou ícones PWA.
 - Reescrever README para refletir funcionalidades remanescentes, rotas atuais, modo dark/white e configuração opcional de Umami.
 
 **Dependências de etapas anteriores:** Etapas 4 e 5.

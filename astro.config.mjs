@@ -5,7 +5,7 @@ import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
 import icon from "astro-icon";
 
-const envSiteUrl = process.env.SITE_URL ?? "https://gianmarcocavallo.com/";
+const envSiteUrl = process.env.SITE_URL ?? "https://patrickgs.netlify.app/";
 const site = envSiteUrl.endsWith("/") ? envSiteUrl : `${envSiteUrl}/`;
 const siteNoTrailingSlash = site.endsWith("/") ? site.slice(0, -1) : site;
 
