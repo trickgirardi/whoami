@@ -1,13 +1,18 @@
 ---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import Card from "./Card/index.astro";
 import { SITE } from "../site-config";
+import ProfilePicture from "../assets/profile.png";
 ---
 
 <Card colSpan="md:col-span-3" rowSpan="md:row-span-3" class="pad-lg">
-  <div class="flex w-full h-full">
-    <div class="flex flex-col justify-between gap-4">
-      <div class="flex flex-col h-full">
-        <h6 class="text-sm font-light m-0 text-darkslate-300">saudações!</h6>
+  <div class="flex flex-col md:flex-row w-full h-full gap-4">
+    <div class="flex flex-col justify-between gap-8 min-w-0">
+      <div class="flex flex-col h-full justify-center">
+        <h6 class="text-sm font-light m-0 mb-2 text-darkslate-300">
+          saudações!
+        </h6>
 
         <p class="sr-only">
           Olá, eu sou {SITE.author.fullName}, desenvolvedor web Full-Stack do
@@ -22,37 +27,78 @@ import { SITE } from "../site-config";
           que tornam o trabalho mais produtivo e eficiente.
         </p>
 
-        <p aria-hidden="true" class="m-0 font-light text-base">
-          <span>
-            Olá, eu sou <b class="font-bold">{SITE.author.fullName}</b>,
-            desenvolvedor web Full-Stack do sul do Brasil, atualmente
-            trabalhando com TypeScript, Next.js, NestJS e PostgreSQL.
+        <div
+          aria-hidden="true"
+          class="flex flex-col gap-2 m-0 font-light text-sm"
+        >
+          <span class="flex items-center gap-2">
+            <Icon
+              name="ri:hand-heart-line"
+              class="intro-icon h-4 w-4 flex-shrink-0 text-darkslate-300"
+            />
+            <span>
+              Olá, eu sou <b class="font-bold">{SITE.author.fullName}</b>,
+              desenvolvedor web Full-Stack do sul do Brasil, atualmente
+              trabalhando com TypeScript, Next.js, NestJS e PostgreSQL.
+            </span>
           </span>
 
-          <br />
-
-          <span class="block mt-2">
-            Atuo com desenvolvimento Full-Stack na Sicoob Corretora SC/RS e
-            estou cursando Análise e Desenvolvimento de Sistemas.
+          <span class="flex items-center gap-2">
+            <Icon
+              name="ri:briefcase-line"
+              class="intro-icon h-4 w-4 flex-shrink-0 text-darkslate-300"
+            />
+            <span>
+              Atuo com desenvolvimento Full-Stack na Sicoob Corretora SC/RS e
+              estou cursando Análise e Desenvolvimento de Sistemas.
+            </span>
           </span>
 
-          <span class="block mt-2">
-            Gosto de entender como a web funciona além dos frameworks,
-            explorando desde navegadores e servidores até a infraestrutura por
-            trás das aplicações.
+          <span class="flex items-center gap-2">
+            <Icon
+              name="ri:global-line"
+              class="intro-icon h-4 w-4 flex-shrink-0 text-darkslate-300"
+            />
+            <span>
+              Gosto de entender como a web funciona além dos frameworks,
+              explorando desde navegadores e servidores até a infraestrutura por
+              trás das aplicações.
+            </span>
           </span>
 
-          <span class="block mt-2">
-            Também busco acompanhar tecnologias modernas e boas práticas para
-            construir software mais seguro, eficiente e fácil de manter.
+          <span class="flex items-center gap-2">
+            <Icon
+              name="ri:shield-check-line"
+              class="intro-icon h-4 w-4 flex-shrink-0 text-darkslate-300"
+            />
+            <span>
+              Também busco acompanhar tecnologias modernas e boas práticas para
+              construir software mais seguro, eficiente e fácil de manter.
+            </span>
           </span>
 
-          <span class="block mt-2">
-            Além do desenvolvimento, tenho interesse por Linux, automações e
-            ferramentas que tornam o trabalho mais produtivo e eficiente.
+          <span class="flex items-center gap-2">
+            <Icon
+              name="ri:terminal-box-line"
+              class="intro-icon h-4 w-4 flex-shrink-0 text-darkslate-300"
+            />
+            <span>
+              Além do desenvolvimento, tenho interesse por Linux, automações e
+              ferramentas que tornam o trabalho mais produtivo e eficiente.
+            </span>
           </span>
-        </p>
+        </div>
       </div>
     </div>
+
+    <Image
+      src={ProfilePicture}
+      alt={`foto de ${SITE.author.firstName}`}
+      width={300}
+      height={300}
+      loading="eager"
+      fetchpriority="high"
+      class="w-auto h-full max-h-[240px] aspect-square rounded-lg object-cover select-none flex-shrink-0 self-center mx-auto md:mx-0"
+    />
   </div>
 </Card>

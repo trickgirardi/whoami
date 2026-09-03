@@ -76,7 +76,7 @@ body.style-paper::before {
 }
 
 .style-paper .card * {
-  font-family: Georgia, "Times New Roman", Times, serif !important;
+  font-family: var(--font-satoshi) !important;
 }
 
 .style-paper h1,
@@ -88,7 +88,9 @@ body.style-paper::before {
 .style-paper p,
 .style-paper span,
 .style-paper time,
-.style-paper a {
+.style-paper a,
+.style-paper dt,
+.style-paper dd {
   color: #1a1208 !important;
 }
 
@@ -109,6 +111,11 @@ body.style-paper::before {
 
 .style-paper .card svg {
   filter: sepia(1) brightness(1.8) contrast(0.75) saturate(0.35);
+}
+
+.style-paper .card svg.intro-icon {
+  color: #1a1208 !important;
+  filter: none !important;
 }
 
 .style-paper .bg-neutral-900 {
